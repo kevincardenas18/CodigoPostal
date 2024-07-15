@@ -33,11 +33,11 @@ provincias = {
 
 @app.route('/verifica', methods=['GET'])
 def verifica():
-    codigo_postal = request.args.get('codigo_postal')
-    code = request.args.get('code')
-    
+    codigo_postal = request.args.get('codigo_postal', '')
+    code = request.args.get('code', '')
+
     if not codigo_postal or not code:
-        return jsonify({"error": "Faltan parámetros"}), 400
+        return jsonify({"data": True})
 
     if code not in provincias:
         return jsonify({"error": "Código de provincia no válido"}), 400
@@ -67,4 +67,4 @@ def verifica():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
